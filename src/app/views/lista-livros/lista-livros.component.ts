@@ -16,6 +16,8 @@ export class ListaLivrosComponent {
   public buscarLivros(): void {
     console.log(`CampoBusca: ${this.campoBusca}`);
     
-    this.livroService.buscar(this.campoBusca);
+    this.livroService.buscar(this.campoBusca).subscribe(
+      retornoApi => console.log(retornoApi)
+    )
   }
 }
