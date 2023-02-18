@@ -1,3 +1,13 @@
+export interface Livro {
+  title: string;
+  authors: string[];
+  publisher: string;
+  publishedDate: string;
+  description: string;
+  previewLink: string;
+  thumbnail: string;
+}
+
 export interface ListaLivrosInterface {
   kind: string;
   totalItems: number;
@@ -52,7 +62,7 @@ interface VolumeInfo {
   subtitle: string;
   authors: string[];
   publisher: string;
-  publishedDate: Date;
+  publishedDate: string;
   description: string;
   industryIdentifiers: IndustryIdentifier[];
   readingModes: ReadingModes;
