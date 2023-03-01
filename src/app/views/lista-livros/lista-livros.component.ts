@@ -1,10 +1,8 @@
-import {
-  Livro,
-  LivroInterface,
-} from "./../../interfaces/lista-livros.interface";
+import { LivroInterface } from "./../../interfaces/lista-livros.interface";
 import { LivroService } from "./../../services/livro.service";
 import { Component, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
+import { LivroModel } from "src/app/interfaces/livro.model";
 
 @Component({
   selector: "app-lista-livros",
@@ -12,7 +10,7 @@ import { Subscription } from "rxjs";
   styleUrls: ["./lista-livros.component.css"],
 })
 export class ListaLivrosComponent implements OnDestroy {
-  public listaLivros: Livro[] = [];
+  public listaLivros: LivroModel[] = [];
   public campoBusca: string = "";
   private subscription: Subscription;
 
@@ -27,16 +25,8 @@ export class ListaLivrosComponent implements OnDestroy {
   }
 
   private converterDadosEmLivro(lista: LivroInterface[]): void {
-    lista.forEach((item) => {
-      this.listaLivros.push({
-        title: item.volumeInfo.title,
-        publisher: item.volumeInfo.publisher,
-        publishedDate: item.volumeInfo.publishedDate,
-        description: item.volumeInfo.description,
-        previewLink: item.volumeInfo.previewLink,
-        thumbnail: item.volumeInfo.imageLinks.thumbnail,
-        authors: item.volumeInfo.authors,
-      });
+    lista.map((item) => {
+      this.listaLivros.push(new LivroModel(item));
     });
   }
 
