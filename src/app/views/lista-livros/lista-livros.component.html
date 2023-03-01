@@ -4,6 +4,7 @@
     <input
       type="search"
       [(ngModel)]="campoBusca"
+      (keydown.enter)="buscarLivros()"
     >
     <button
       (click)="buscarLivros()"
