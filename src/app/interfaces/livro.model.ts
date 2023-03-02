@@ -15,7 +15,7 @@ export class LivroModel {
       (this.publishedDate = item.volumeInfo.publishedDate),
       (this.description = item.volumeInfo.description),
       (this.previewLink = item.volumeInfo.previewLink),
-      (this.thumbnail = item.volumeInfo.imageLinks.thumbnail),
+      (this.thumbnail = item.volumeInfo.imageLinks?.thumbnail),
       (this.authors = item.volumeInfo.authors);
   }
 }
