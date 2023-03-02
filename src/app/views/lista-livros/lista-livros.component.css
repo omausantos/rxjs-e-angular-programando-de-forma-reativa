@@ -60,7 +60,7 @@ section p {
 }
 
 .mensagem-erro {
-  color: #6C63FF;
+  color: red;
 }
 
 input[type='search']:focus {
@@ -121,12 +121,7 @@ section button {
   margin-left: 64px;
 }
 
-
-
-
-
-
-
-
-
-
+.pesquisa {
+  color: black;
+  display: block;
+}
