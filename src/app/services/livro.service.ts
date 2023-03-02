@@ -10,14 +10,9 @@ export class LivroService {
   private readonly domainName = "https://www.googleapis.com/";
   constructor(private httpClient: HttpClient) {}
 
-  public buscar(termoBusca: string): Observable<LivroInterface[]> {
+  public buscar(termoBusca: string): Observable<ListaLivrosInterface> {
     const params = new HttpParams().append('q', termoBusca);
-    return this.httpClient.get<ListaLivrosInterface>(`${this.domainName}books/v1/volumes`, { params })
-      .pipe(
-        tap(retornoApi => console.log('TAP: antes de MAP', retornoApi)),
-        map(retornoApi => retornoApi.items),
-        tap(retornoApi => console.log('TAP: após de MAP', retornoApi)),
-      )
+    return this.httpClient.get<ListaLivrosInterface>(`${this.domainName}books/v1/volumes`, { params });
   }
 }
 

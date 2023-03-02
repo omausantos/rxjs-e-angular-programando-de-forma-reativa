@@ -9,6 +9,7 @@ import {
   filter,
   map,
   switchMap,
+  tap,
 } from "rxjs";
 import { LivroModel } from "src/app/interfaces/livro.model";
 import { FormControl } from "@angular/forms";
@@ -20,8 +21,9 @@ const TEMPOENTRECHAMADAS: number = 300;
   styleUrls: ["./lista-livros.component.css"],
 })
 export class ListaLivrosComponent {
-  public campoBusca = new FormControl();
-  public mensagemDeErro = '';
+  public campoBusca: FormControl = new FormControl();
+  public mensagemDeErro: string = '';
+  public quantidadeDeLivros: string = '';
 
   constructor(private livroService: LivroService) {}
 
@@ -30,6 +32,8 @@ export class ListaLivrosComponent {
     debounceTime(TEMPOENTRECHAMADAS),
     distinctUntilChanged(),
     switchMap((valorDigitado) => this.livroService.buscar(valorDigitado)),
+    tap(retornoApi => {this.quantidadeDeLivros = retornoApi.totalItems ? retornoApi.totalItems : '0'}),
+    map(retornoApi => retornoApi.items ?? []),
     map((listaItens) => this.converterDadosEmLivro(listaItens)),
     catchError(() => {
       this.mensagemDeErro = "Erro ao realizar buscar, recarregar a página!";

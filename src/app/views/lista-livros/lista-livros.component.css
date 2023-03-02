@@ -121,12 +121,7 @@ section button {
   margin-left: 64px;
 }
 
-
-
-
-
-
-
-
-
-
+.pesquisa {
+  color: black;
+  display: block;
+}

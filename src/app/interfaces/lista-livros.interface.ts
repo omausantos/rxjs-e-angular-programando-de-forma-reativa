@@ -1,6 +1,6 @@
 export interface ListaLivrosInterface {
   kind: string;
-  totalItems: number;
+  totalItems: string;
   items: LivroInterface[];
 }
 
