@@ -2,9 +2,10 @@ import { LivroInterface } from "./../../interfaces/lista-livros.interface";
 import { LivroService } from "./../../services/livro.service";
 import { Component } from "@angular/core";
 import {
-  bufferCount,
+  catchError,
   debounceTime,
   distinctUntilChanged,
+  EMPTY,
   filter,
   map,
   switchMap,
@@ -20,6 +21,7 @@ const TEMPOENTRECHAMADAS: number = 300;
 })
 export class ListaLivrosComponent {
   public campoBusca = new FormControl();
+  public mensagemDeErro = '';
 
   constructor(private livroService: LivroService) {}
 
@@ -28,7 +30,11 @@ export class ListaLivrosComponent {
     debounceTime(TEMPOENTRECHAMADAS),
     distinctUntilChanged(),
     switchMap((valorDigitado) => this.livroService.buscar(valorDigitado)),
-    map((listaItens) => this.converterDadosEmLivro(listaItens))
+    map((listaItens) => this.converterDadosEmLivro(listaItens)),
+    catchError(() => {
+      this.mensagemDeErro = "Erro ao realizar buscar, recarregar a página!";
+      return EMPTY;
+    })
   );
 
   private minimoTextoParaPesquisa(valor: string): boolean {
